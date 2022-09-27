@@ -5,8 +5,7 @@ import Alert from "./components/Alert";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
 import React, { useState } from "react";
-import {BrowserRouter ,Route,Routes} from "react-router-dom";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   let [darkMode, setdarkMode] = useState("light");
@@ -40,30 +39,29 @@ function App() {
   };
 
   return (
-    
     // <h1></h1> <-- not allowed
     <>
       {/* <Navbar title= "TextUtils" downTxt = "Down_btn"></Navbar> */}
       <BrowserRouter>
-      <Navbar mode={darkMode} toggleMode={togglemodefunc} />
-      <Alert alertMsg={alertMsg} />
-      
-      <div className="container my-3">
-         <Routes>
-              <Route path="/" element ={<TextForm
-              setMsg={setMsg}
-              heading="Enter the text to analyze"
-              mode={darkMode}
-              heading2="Summary"
-            />} />
-            <Route path="/about" element={<About />}/>
-         </Routes>
-            
-          
-            
-       
-            
-      </div>
+        <Navbar mode={darkMode} toggleMode={togglemodefunc} />
+        <Alert alertMsg={alertMsg} />
+
+        <div className="container my-3">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <TextForm
+                  setMsg={setMsg}
+                  heading="Enter the text to analyze"
+                  mode={darkMode}
+                  heading2="Summary"
+                />
+              }
+            />
+            <Route path="/about"  element={<About abouthead= "About Us" mode={darkMode}/>} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </>
   );

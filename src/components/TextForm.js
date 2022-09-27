@@ -25,19 +25,26 @@ export default function TextForm(props) {
     setText(newtext);
 
   }
+  const toSelectFont=()=>{
+    
+    navigator.clipboard.writeText(text);
+    props.setMsg("Text Copied","success");
+  }
 
   // const [myfont,setmyfont] =useState({
   //   fontFa
   // })
   const toChangeFont= () =>{
-    // let newtext = document.getElementById("Change").style.fontStyle="italic";
-     let newtext = text.fontStyle="italic";
-    console.log(newtext);
-    setText(newtext);
+   let newtext = document.getElementById("myBox").style.fontStyle="italic";
+   newtext = "";
+   setText(newtext);  
   }
+
+  // let myStyle={
+  //   color: 'purple'
+  // }
   const [text, setText] = useState("");
   //   text = "new text"; //wrong way to change the state
-
   //correct way
   //  setText("new Set text");
 
@@ -58,6 +65,7 @@ export default function TextForm(props) {
           ></textarea>
 
           <button
+          disabled={text.length===0}
             type="button"
             onClick={toUpperclick}
             className="btn btn-primary my-3"
@@ -66,6 +74,7 @@ export default function TextForm(props) {
           </button>
           {/* to lower case  */}
           <button
+           disabled={text.length===0}
             type="button"
             onClick={toLowerclick}
             className="btn btn-primary my-3 mx-2"
@@ -73,6 +82,7 @@ export default function TextForm(props) {
             Convert to Lower case
           </button>
           <button
+           disabled={text.length===0}
             type="button"
             onClick={toclear}
             className="btn btn-primary my-3 mx-1"
@@ -82,12 +92,22 @@ export default function TextForm(props) {
 
           {/* change font  */}
           <button
+           disabled={text.length===0}
             type="button"
             id="Change"
             onClick={toChangeFont}
             className="btn btn-primary my-3 mx-1"
           >
             Change Font
+          </button>
+          <button
+           disabled={text.length===0}
+            type="button"
+            
+            onClick={toSelectFont}
+            className="btn btn-primary my-3 mx-1"
+          >
+            CopyText 
           </button>
           {/* change font  */}
 
@@ -96,9 +116,9 @@ export default function TextForm(props) {
       </div>
       <div className="container my-4">
         <h1 className={`text-${props.mode==='light'?'dark':'light'}`}>{props.heading2}</h1>
-        <p className={`text-${props.mode==='light'?'dark':'light'}`}>Number of words = <b> {text.split(" ").length}</b></p>
+        <p className={`text-${props.mode==='light'?'dark':'light'}`}>Number of words = <b> {text.split(/\s+/).filter((element)=>{return element.length!==0}).length}</b></p>
         <p className={`text-${props.mode==='light'?'dark':'light'}`}>Number of characters = <b> {text.length}</b></p>
-        <p className={`text-${props.mode==='light'?'dark':'light'}`}><b> {0.008 * text.split(" ").length}</b> Minutes Read </p>
+        <p className={`text-${props.mode==='light'?'dark':'light'}`}><b> {0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length}</b> Minutes Read </p>
         <h2 className={`text-${props.mode==='light'?'dark':'light'}`}>Preview</h2>
         <p className={`text-${props.mode==='light'?'dark':'light'}`}><b> {text.length>0?text.toLocaleLowerCase():'Enter the text'}</b></p>
       </div>
